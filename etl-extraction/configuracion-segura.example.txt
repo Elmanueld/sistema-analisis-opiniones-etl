@@ -1,0 +1,6 @@
+# Plantilla. No agregues credenciales reales a este archivo.
+# Variables de entorno equivalentes:
+# ConnectionStrings__OperationalDb
+# Sources__Api__Endpoint
+# Sources__Api__BearerToken
+# Sources__Api__Enabled

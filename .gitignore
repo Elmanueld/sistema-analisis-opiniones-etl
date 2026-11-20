@@ -1,0 +1,14 @@
+# Local configuration and build outputs
+**/bin/
+**/obj/
+.vs/
+.vscode/
+*.user
+*.suo
+config-conexion.txt
+**/appsettings.*.json
+**/staging/
+**/logs/
+*.log
+.DS_Store
+Thumbs.db

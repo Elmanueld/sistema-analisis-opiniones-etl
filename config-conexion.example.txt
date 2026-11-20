@@ -1,0 +1,2 @@
+# Copia este archivo como config-conexion.txt y cambia Server por tu instancia de SQL Server.
+Server=.\SQLEXPRESS;Database=SistemaBDTransaccional;Integrated Security=True;Encrypt=True;TrustServerCertificate=True;

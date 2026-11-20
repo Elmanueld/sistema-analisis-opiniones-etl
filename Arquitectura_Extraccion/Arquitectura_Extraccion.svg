@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1480" height="770" viewBox="0 0 1480 770">
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#53697a"/></marker></defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="740.0" y="42" text-anchor="middle" font-family="Arial" font-size="24" font-weight="700" fill="#203848">Arquitectura base de extracción ETL</text>
+<text x="740.0" y="70" text-anchor="middle" font-family="Arial" font-size="14" fill="#53697a">Sistema de Opiniones de Clientes · práctica de extracción</text>
+<polyline points="330,210 378,210 378,290 430,290" fill="none" stroke="#53697a" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="330,385 430,385" fill="none" stroke="#53697a" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="330,385 360,385 360,560 330,560" fill="none" stroke="#53697a" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="370" y="478" text-anchor="middle" font-family="Arial" font-size="12" fill="#53697a">lee comentarios</text>
+<polyline points="330,560 378,560 378,495 430,495" fill="none" stroke="#53697a" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="815,390 900,390" fill="none" stroke="#53697a" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="1135,390 1230,390" fill="none" stroke="#53697a" stroke-width="2" stroke-dasharray="8 7" marker-end="url(#arrow)"/>
+<text x="1182" y="375" text-anchor="middle" font-family="Arial" font-size="12" fill="#53697a">Etapa posterior</text>
+<polyline points="1332,450 1332,535" fill="none" stroke="#53697a" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="815,575 850,610 900,610 900,630" fill="none" stroke="#53697a" stroke-width="2"/>
+<rect x="45" y="150" width="285" height="120" rx="3" fill="#f7fafc" stroke="#526b7d" stroke-width="1.6"/>
+<rect x="45" y="150" width="285" height="32" fill="#dce7ee" stroke="#526b7d" stroke-width="1.6"/>
+<text x="57" y="171" font-family="Arial" font-size="14" font-weight="700" fill="#203848">CSV · encuestas</text>
+<text x="187.5" y="204" text-anchor="middle" font-family="Arial" font-size="13" fill="#263b48">DatosCSV/surveys_part1.csv</text>
+<text x="187.5" y="226" text-anchor="middle" font-family="Arial" font-size="13" fill="#263b48">Lectura secuencial y mapeo de columnas</text>
+<rect x="45" y="325" width="285" height="120" rx="3" fill="#f7fafc" stroke="#526b7d" stroke-width="1.6"/>
+<rect x="45" y="325" width="285" height="32" fill="#dce7ee" stroke="#526b7d" stroke-width="1.6"/>
+<text x="57" y="346" font-family="Arial" font-size="14" font-weight="700" fill="#203848">SQL Server · OLTP</text>
+<text x="187.5" y="379" text-anchor="middle" font-family="Arial" font-size="13" fill="#263b48">SistemaBDTransaccional</text>
+<text x="187.5" y="401" text-anchor="middle" font-family="Arial" font-size="13" fill="#263b48">ReseniasWeb para el Worker</text>
+<text x="187.5" y="423" text-anchor="middle" font-family="Arial" font-size="13" fill="#263b48">ComentariosSociales para la API</text>
+<rect x="45" y="500" width="285" height="120" rx="3" fill="#f7fafc" stroke="#526b7d" stroke-width="1.6"/>
+<rect x="45" y="500" width="285" height="32" fill="#dce7ee" stroke="#526b7d" stroke-width="1.6"/>
+<text x="57" y="521" font-family="Arial" font-size="14" font-weight="700" fill="#203848">API REST propia · comentarios</text>
+<text x="187.5" y="554" text-anchor="middle" font-family="Arial" font-size="13" fill="#263b48">ASP.NET Core · GET /api/comments</text>
+<text x="187.5" y="576" text-anchor="middle" font-family="Arial" font-size="13" fill="#263b48">Consulta ComentariosSociales activos</text>
+<text x="187.5" y="598" text-anchor="middle" font-family="Arial" font-size="13" fill="#263b48">JSON para el Worker local</text>
+<rect x="430" y="210" width="385" height="365" rx="3" fill="#f7fafc" stroke="#526b7d" stroke-width="1.6"/>
+<rect x="430" y="210" width="385" height="32" fill="#dce7ee" stroke="#526b7d" stroke-width="1.6"/>
+<text x="442" y="231" font-family="Arial" font-size="14" font-weight="700" fill="#203848">Worker Service · .NET 8</text>
+<text x="622.5" y="264" text-anchor="middle" font-family="Arial" font-size="13" fill="#263b48">IExtractor por fuente</text>
+<text x="622.5" y="286" text-anchor="middle" font-family="Arial" font-size="13" fill="#263b48">CsvExtractor · DatabaseExtractor · ApiExtractor</text>
+<text x="622.5" y="308" text-anchor="middle" font-family="Arial" font-size="13" fill="#263b48">Extracción asíncrona en paralelo</text>
+<text x="622.5" y="330" text-anchor="middle" font-family="Arial" font-size="13" fill="#263b48">ILogger + métricas de duración / conteo</text>
+<text x="622.5" y="352" text-anchor="middle" font-family="Arial" font-size="13" fill="#263b48">Configuración JSON + variables protegidas</text>
+<rect x="900" y="310" width="235" height="170" rx="3" fill="#f7fafc" stroke="#526b7d" stroke-width="1.6"/>
+<rect x="900" y="310" width="235" height="32" fill="#dce7ee" stroke="#526b7d" stroke-width="1.6"/>
+<text x="912" y="331" font-family="Arial" font-size="14" font-weight="700" fill="#203848">Staging temporal</text>
+<text x="1017.5" y="364" text-anchor="middle" font-family="Arial" font-size="13" fill="#263b48">JSON Lines por fuente</text>
+<text x="1017.5" y="386" text-anchor="middle" font-family="Arial" font-size="13" fill="#263b48">Publicación atómica al completar</text>
+<text x="1017.5" y="408" text-anchor="middle" font-family="Arial" font-size="13" fill="#263b48">Archivos .partial ante error</text>
+<rect x="1230" y="300" width="205" height="150" rx="3" fill="#f7fafc" stroke="#526b7d" stroke-width="1.6"/>
+<rect x="1230" y="300" width="205" height="32" fill="#dce7ee" stroke="#526b7d" stroke-width="1.6"/>
+<text x="1242" y="321" font-family="Arial" font-size="14" font-weight="700" fill="#203848">Base analítica</text>
+<text x="1332.5" y="354" text-anchor="middle" font-family="Arial" font-size="13" fill="#263b48">SistemaBDAnalitica</text>
+<text x="1332.5" y="376" text-anchor="middle" font-family="Arial" font-size="13" fill="#263b48">DW estrella</text>
+<text x="1332.5" y="398" text-anchor="middle" font-family="Arial" font-size="13" fill="#263b48">Siguiente etapa ETL</text>
+<rect x="1230" y="535" width="205" height="110" rx="3" fill="#f7fafc" stroke="#526b7d" stroke-width="1.6"/>
+<rect x="1230" y="535" width="205" height="32" fill="#dce7ee" stroke="#526b7d" stroke-width="1.6"/>
+<text x="1242" y="556" font-family="Arial" font-size="14" font-weight="700" fill="#203848">Dashboard</text>
+<text x="1332.5" y="589" text-anchor="middle" font-family="Arial" font-size="13" fill="#263b48">Consultas agregadas</text>
+<text x="1332.5" y="611" text-anchor="middle" font-family="Arial" font-size="13" fill="#263b48">Consumidor analítico</text>
+<rect x="430" y="630" width="705" height="90" rx="3" fill="#f7fafc" stroke="#526b7d" stroke-width="1.6"/>
+<rect x="430" y="630" width="705" height="32" fill="#dce7ee" stroke="#526b7d" stroke-width="1.6"/>
+<text x="442" y="651" font-family="Arial" font-size="14" font-weight="700" fill="#203848">Controles de operación y seguridad</text>
+<text x="782.5" y="684" text-anchor="middle" font-family="Arial" font-size="13" fill="#263b48">Credenciales fuera del repositorio · TLS · acceso limitado al staging · logs sin tokens</text>
+</svg>
