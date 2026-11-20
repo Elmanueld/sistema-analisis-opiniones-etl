@@ -3,6 +3,7 @@ namespace Opiniones.ExtractionWorker.Configuration;
 public sealed class ExtractionOptions
 {
     public string StagingDirectory { get; set; } = "./staging";
+    public int IntervalMinutes { get; set; } = 1;
 }
 
 public sealed class CsvSourceOptions

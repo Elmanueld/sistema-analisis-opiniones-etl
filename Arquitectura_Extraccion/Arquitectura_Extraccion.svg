@@ -35,7 +35,7 @@
 <text x="442" y="231" font-family="Arial" font-size="14" font-weight="700" fill="#203848">Worker Service · .NET 8</text>
 <text x="622.5" y="264" text-anchor="middle" font-family="Arial" font-size="13" fill="#263b48">IExtractor por fuente</text>
 <text x="622.5" y="286" text-anchor="middle" font-family="Arial" font-size="13" fill="#263b48">CsvExtractor · DatabaseExtractor · ApiExtractor</text>
-<text x="622.5" y="308" text-anchor="middle" font-family="Arial" font-size="13" fill="#263b48">Extracción asíncrona en paralelo</text>
+<text x="622.5" y="308" text-anchor="middle" font-family="Arial" font-size="13" fill="#263b48">Extracción concurrente por intervalo</text>
 <text x="622.5" y="330" text-anchor="middle" font-family="Arial" font-size="13" fill="#263b48">ILogger + métricas de duración / conteo</text>
 <text x="622.5" y="352" text-anchor="middle" font-family="Arial" font-size="13" fill="#263b48">Configuración JSON + variables protegidas</text>
 <rect x="900" y="310" width="235" height="170" rx="3" fill="#f7fafc" stroke="#526b7d" stroke-width="1.6"/>

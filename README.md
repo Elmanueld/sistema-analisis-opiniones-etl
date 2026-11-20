@@ -10,11 +10,11 @@ Repositorio de entregas del proyecto académico: sistema OLTP, modelo analítico
 - `Documento_Tecnico_Extraccion.pdf` y `.md`: decisiones, atributos de calidad, pasos y límites.
 - `Ejecutar extraccion completa.cmd`: inicia API y Worker en ventanas de consola.
 
-El Worker extrae encuestas únicamente desde `DatosCSV/surveys_part1.csv`, reseñas web publicadas (`Estado = 1`) desde SQL Server y comentarios sociales mediante la API propia. Genera JSONL en staging; transformación y carga a OLAP quedan para una actividad posterior.
+El Worker extrae encuestas únicamente desde `DatosCSV/surveys_part1.csv`, reseñas web publicadas (`Estado = 1`) desde SQL Server y comentarios sociales mediante la API propia. Genera JSONL en staging y repite el ciclo con el intervalo configurable `Extraction:IntervalMinutes` (1 minuto por defecto); detén el proceso con Ctrl+C. La transformación y carga a OLAP quedan para una actividad posterior.
 
 ## Ejecutar extracción
 
-Requisitos: .NET 8 SDK y SQL Server con `SistemaBDTransaccional` instalado y poblado. Configura las conexiones en User Secrets (por separado en ambos proyectos, con instrucciones detalladas en `Documento_Tecnico_Extraccion.md`) y ejecuta `Ejecutar extraccion completa.cmd`.
+Requisitos: .NET 8 SDK y SQL Server con `SistemaBDTransaccional` instalado y poblado. Configura las conexiones en User Secrets (por separado en ambos proyectos, con instrucciones detalladas en `Documento_Tecnico_Extraccion.md`) y ejecuta `Ejecutar extraccion completa.cmd`. El PDF incluye fragmentos de evidencia del código.
 
 La API usa HTTP solo en localhost durante desarrollo. En otro ambiente requiere HTTPS y `Api__BearerToken`; el Worker debe tener el mismo token en `Sources:Api:BearerToken`. No guardes secretos en el repositorio.
 

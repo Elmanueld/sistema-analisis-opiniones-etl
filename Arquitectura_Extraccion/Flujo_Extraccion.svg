@@ -59,5 +59,5 @@
 <rect x="520" y="850" width="400" height="60" rx="3" fill="#f7fafc" stroke="#526b7d" stroke-width="1.6"/>
 <rect x="520" y="850" width="400" height="32" fill="#dce7ee" stroke="#526b7d" stroke-width="1.6"/>
 <text x="532" y="871" font-family="Arial" font-size="14" font-weight="700" fill="#203848">Resultado</text>
-<text x="720.0" y="904" text-anchor="middle" font-family="Arial" font-size="13" fill="#263b48">Staging listo para transformación y carga posterior</text>
+<text x="720.0" y="904" text-anchor="middle" font-family="Arial" font-size="13" fill="#263b48">Staging listo; espera intervalo y repite el ciclo</text>
 </svg>

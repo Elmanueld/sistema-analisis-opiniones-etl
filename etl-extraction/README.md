@@ -1,15 +1,15 @@
 # Worker de extracción de opiniones
 
-Worker Service en .NET 8. Extrae únicamente las tres fuentes indicadas por la práctica: encuesta interna desde `DatosCSV/surveys_part1.csv`, reseñas web publicadas directamente desde `SistemaBDTransaccional.dbo.ReseniasWeb` y comentarios sociales desde la API propia del proyecto (`GET /api/comments`). La API lee `dbo.ComentariosSociales`.
+Worker Service en .NET 8 para extraer únicamente las fuentes de esta práctica: encuesta interna desde `DatosCSV/surveys_part1.csv`, reseñas web publicadas directamente desde `SistemaBDTransaccional.dbo.ReseniasWeb` y comentarios sociales desde `GET /api/comments` de la API propia (`etl-api`). La API consulta `dbo.ComentariosSociales`.
 
 ## Requisitos y configuración
 
 - .NET 8 SDK.
-- SQL Server con `SistemaBDTransaccional` y las reseñas/comentarios cargados en la práctica anterior.
-- Ejecutar también el proyecto `etl-api` para exponer los comentarios sociales.
-- Guardar cadenas de conexión mediante User Secrets o variables protegidas. No incluir credenciales en `appsettings.json`.
+- SQL Server con `SistemaBDTransaccional` y reseñas/comentarios cargados.
+- Ejecutar `etl-api` para exponer los comentarios sociales.
+- Guardar cadenas de conexión mediante User Secrets o variables protegidas; no guardar credenciales en `appsettings.json`.
 
-La consulta relacional predeterminada filtra reseñas publicadas (`Estado = 1`). El Worker usa `http://localhost:5080/api/comments` en desarrollo. En despliegue configura HTTPS.
+El Worker llama la API local en `http://localhost:5080/api/comments`; fuera de loopback usa HTTPS. `Extraction:IntervalMinutes` controla la espera entre ciclos (predeterminado: 1 minuto). El Worker sigue ejecutándose hasta detenerlo con Ctrl+C.
 
 ## Ejecutar
 
@@ -31,8 +31,8 @@ dotnet user-secrets set "Sources:Database:ConnectionString" "Server=.\SQLEXPRESS
 dotnet run
 ```
 
-La API tiene `GET /health` y `GET /api/comments`. El Worker habilita las tres fuentes y escribe staging JSONL por fuente; no transforma ni carga dimensiones/hechos OLAP. Si SQL Server no está disponible, la fuente respectiva falla y se reporta en el log.
+La configuración habilita las tres fuentes. Cada ciclo escribe JSONL independiente en staging. La carga de dimensiones y hechos OLAP queda para la etapa posterior.
 
 ## Diseño
 
-`IExtractor` abstrae el proceso de extracción. `CsvExtractor`, `DatabaseExtractor` y `ApiExtractor` aplican polimorfismo para sus fuentes; se registran por inyección de dependencias. `JsonLinesStagingWriter` mantiene separada la escritura. Para agregar una fuente se implementa y registra un adaptador sin cambiar la lógica central del Worker (Open/Closed).
+`IExtractor` abstrae la extracción. `CsvExtractor`, `DatabaseExtractor` y `ApiExtractor` aplican polimorfismo y se registran con inyección de dependencias; se puede incorporar un adaptador sin cambiar el flujo central (Open/Closed). `JsonLinesStagingWriter` separa la publicación de archivos. `ILogger` registra resultados, tiempos y errores por fuente.
