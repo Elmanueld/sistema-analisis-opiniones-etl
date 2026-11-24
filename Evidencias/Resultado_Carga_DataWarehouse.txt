@@ -1,0 +1,97 @@
+EVIDENCIA DE CARGA DEL DATA WAREHOUSE
+Proyecto: Sistema de Análisis de Opiniones
+Servidor consultado: SQL Server local (instancia SQLEXPRESS)
+Verificación final: 2026-11-24 14:16:48
+
+EJECUCIÓN REAL
+Comando: sqlcmd -C -I -b -S .\SQLEXPRESS -E -i Modelado\02_CargarDataWarehouse.sql
+Resultado: ejecución correcta del procedimiento DW.usp_CargarOpinionesDesdeOLTP.
+La carga inicial se realizó desde una base analítica recién creada. El procedimiento se ejecutó después nuevamente para revisar que no agregue duplicados.
+
+CONTEOS DEVUELTOS POR EL PROCEDIMIENTO EN LA EJECUCIÓN REPETIDA
+Tabla             Filas
+DimFecha            203
+DimProducto         201
+DimCliente          501
+DimFuente             6
+DimSentimiento        4
+DimEvento             1
+FactOpiniones       406
+
+RESULTADO DE LA CONSULTA DE VALIDACIÓN
+Desglose por fuente:
+Encuesta interna (CSV)       6
+Reseñas web                 200
+Facebook (API)               68
+Instagram (API)              77
+Twitter (API)                55
+Total                       406
+
+Desglose por sentimiento:
+Positivo                     85
+Neutral                      51
+Negativo                     70
+Sin clasificar              200
+
+Rango de fecha: 2024-09-13 a 2025-09-13; 202 días distintos más la fecha desconocida.
+Hechos sin dimensión de fecha: 0
+Hechos sin dimensión de producto: 0
+Hechos sin dimensión de cliente: 0
+Hechos sin dimensión de fuente: 0
+Hechos duplicados por fuente e identificador de origen: 0
+
+SALIDA DIRECTA DE SQLCMD - RESUMEN DE TABLAS
+Changed database context to 'SistemaBDAnalitica'.
+Tabla          Filas               
+-------------- --------------------
+DimFecha                        203
+DimProducto                     201
+DimCliente                      501
+DimFuente                         6
+DimSentimiento                    4
+DimEvento                         1
+FactOpiniones                   406
+SALIDA DIRECTA DE SQLCMD - VALIDACIONES
+Changed database context to 'SistemaBDAnalitica'.
+Tabla|Filas
+-----|-----
+DimFecha|203
+DimProducto|201
+DimCliente|501
+DimFuente|6
+DimSentimiento|4
+DimEvento|1
+FactOpiniones|406
+Canal|TipoFuente|NombreFuente|Opiniones
+-----|----------|------------|---------
+Desconocido|NULL|NULL|0
+Encuesta|CSV|Encuesta interna|6
+Facebook|API|Facebook|68
+Instagram|API|Instagram|77
+Reseña web|Web|Reseñas web|200
+Twitter|API|Twitter|55
+Sentimiento|Opiniones
+-----------|---------
+Negativo|70
+Neutral|51
+Positivo|85
+Sin clasificar|200
+FechaInicial|FechaFinal|DiasCargados
+------------|----------|------------
+2024-09-13|2025-09-13|202
+HechosSinFecha
+--------------
+0
+HechosSinProducto
+-----------------
+0
+HechosSinCliente
+----------------
+0
+HechosSinFuente
+---------------
+0
+HechosDuplicados
+----------------
+0
+

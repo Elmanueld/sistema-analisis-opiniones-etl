@@ -1,27 +1,37 @@
 # Sistema de Análisis de Opiniones
 
-Repositorio de entregas del proyecto académico: sistema OLTP, modelo analítico OLAP y Actividad 2 de arquitectura y extracción.
+Repositorio de entregas del proyecto académico: sistema OLTP, modelo analítico OLAP, extracción y carga del Data Warehouse.
 
-## Actividad 2: extracción
+## Carga del Data Warehouse
 
-- `etl-extraction/`: Worker Service .NET 8, adaptadores `CsvExtractor`, `DatabaseExtractor` y `ApiExtractor`, e implementación de staging JSONL.
-- `etl-api/`: API REST .NET 8. `GET /api/comments` expone comentarios activos de `dbo.ComentariosSociales`; el Worker los consume. `GET /health` comprueba disponibilidad.
-- `Arquitectura_Extraccion/`: diagrama de arquitectura y flujo, editables en draw.io y exportados en PNG/SVG.
-- `Documento_Tecnico_Extraccion.pdf` y `.md`: decisiones, atributos de calidad, pasos y límites.
-- `Ejecutar extraccion completa.cmd`: inicia API y Worker en ventanas de consola.
+- `Modelado/01_SistemaBDAnalitica.sql`: crea la base, dimensiones, hecho y miembros desconocidos.
+- `Modelado/02_CargarDataWarehouse.sql`: carga idempotente desde `SistemaBDTransaccional` a dimensiones y `DW.FactOpiniones`.
+- `Modelado/03_ValidarCargaDataWarehouse.sql`: valida conteos, cobertura dimensional y duplicados.
+- `Modelado/README_Carga_DataWarehouse.md`: reglas de mapeo y pasos para reproducir.
+- `Evidencias/Resultado_Carga_DataWarehouse.txt`: resumen de la ejecución y consultas reales en SQL Server local.
+- `Informe_Carga_DataWarehouse.pdf`: descripción del proceso, tablas cargadas, evidencias e hipervínculo al repositorio.
 
-El Worker extrae encuestas únicamente desde `DatosCSV/surveys_part1.csv`, reseñas web publicadas (`Estado = 1`) desde SQL Server y comentarios sociales mediante la API propia. Genera JSONL en staging y repite el ciclo con el intervalo configurable `Extraction:IntervalMinutes` (1 minuto por defecto); detén el proceso con Ctrl+C. La transformación y carga a OLAP quedan para una actividad posterior.
+Para cargar y verificar con SQL Server local, desde la raíz ejecuta:
 
-## Ejecutar extracción
+```powershell
+sqlcmd -C -I -b -S .\SQLEXPRESS -E -i Modelado\01_SistemaBDAnalitica.sql
+sqlcmd -C -I -b -S .\SQLEXPRESS -E -i Modelado\02_CargarDataWarehouse.sql
+sqlcmd -C -I -b -S .\SQLEXPRESS -E -i Modelado\03_ValidarCargaDataWarehouse.sql
+```
 
-Requisitos: .NET 8 SDK y SQL Server con `SistemaBDTransaccional` instalado y poblado. Configura las conexiones en User Secrets (por separado en ambos proyectos, con instrucciones detalladas en `Documento_Tecnico_Extraccion.md`) y ejecuta `Ejecutar extraccion completa.cmd`. El PDF incluye fragmentos de evidencia del código.
+La carga observada insertó 406 hechos: 6 encuestas, 200 reseñas y 200 comentarios sociales. La segunda ejecución conservó los conteos; las comprobaciones de claves y duplicados dieron cero.
 
-La API usa HTTP solo en localhost durante desarrollo. En otro ambiente requiere HTTPS y `Api__BearerToken`; el Worker debe tener el mismo token en `Sources:Api:BearerToken`. No guardes secretos en el repositorio.
+## Actividad de arquitectura y extracción
 
-## Estructura restante
+- `etl-extraction/`: Worker Service .NET 8 con adaptadores CSV, SQL Server y API REST, staging JSONL y ciclo periódico.
+- `etl-api/`: API REST propia que expone en `GET /api/comments` los comentarios sociales almacenados en el OLTP.
+- `Arquitectura_Extraccion/`: diagramas draw.io y exportaciones PNG/SVG.
+- `Documento_Tecnico_Extraccion.pdf`: decisiones de diseño, atributos de calidad y evidencias de código.
 
-- `database/`, `DatosCSV/`, `etl/`: base y aplicación transaccional de origen.
-- `Modelado/`: scripts, consultas y diagrama del modelo analítico tipo estrella.
-- `Referencias/`: documentos recibidos como material de referencia.
+## Proyecto transaccional y modelo
 
-`config-conexion.example.txt` es una plantilla; copia y personaliza localmente, sin subir credenciales reales.
+- `database/`, `DatosCSV/`, `etl/`: OLTP y su proceso de carga previo.
+- `Modelado/`: modelo estrella, consultas y diagrama analítico.
+- `Referencias/`: documentos entregados como material de referencia.
+
+Las cadenas de conexión y tokens deben permanecer fuera del repositorio.
